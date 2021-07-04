@@ -1,8 +1,7 @@
 import java.util.Iterator;
 
 public class Deque<Item> implements Iterable<Item> {
-	private Node first = null;
-	private Node last = null;
+	private Node first,last;
 	
 	private class ListIterator implements Iterator<Item>{
 		private Node current = first;
@@ -24,7 +23,8 @@ public class Deque<Item> implements Iterable<Item> {
 	}
 	// construct an empty deque
     public Deque() {
-    	
+    	first =  new Node();
+    	last = new Node();
     }
 
     // is the deque empty?

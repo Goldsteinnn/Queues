@@ -2,15 +2,17 @@ import java.util.Iterator;
 
 public class Deque<Item> implements Iterable<Item> {
 	private Node first = null;
+	private Node last = null;
+	
 	private class ListIterator implements Iterator<Item>{
 		private Node current = first;
 		public boolean hasNext() {
-			return current.next != null;
+			return current.next!= null;
 		}
 		public Item next() {
-			// TODO Auto-generated method stub
 			Item item = current.item;
 			current  = current.next;
+			System.out.println(current.item);
 			return item;
 		}
 	}
@@ -18,10 +20,11 @@ public class Deque<Item> implements Iterable<Item> {
 	private class Node{
 		Item item;
 		Node next;
+		Node prev;
 	}
 	// construct an empty deque
     public Deque() {
-    	first = new Node();
+    	
     }
 
     // is the deque empty?
@@ -32,17 +35,40 @@ public class Deque<Item> implements Iterable<Item> {
     // return the number of items on the deque
     public int size() {
     	int count = 0;
-    	return 0;
+    	while(iterator().hasNext()) {
+    		iterator().next();
+    		count++;
+    	}
+    	return count;
     }
 
     // add the item to the front
     public void addFirst(Item item) {
+    	Node oldFirst =  first;
+    	first.item = item;
+    	if(isEmpty()) {
+    		first.next = null;
+    	}
+    	else {
+    		first.next = oldFirst;
+    		first.prev = null;
+    	}
+    	
     	
     }
 
     // add the item to the back
     public void addLast(Item item) {
-    	
+    	Node oldLast = last;
+    	last = new Node();
+    	last.item = item;
+    	last.next = null;
+    	if(isEmpty()) {
+    		first = last;
+    	}
+    	else {
+    		oldLast.next = last;
+    	}
     }
 
     // remove and return the item from the front
@@ -63,7 +89,8 @@ public class Deque<Item> implements Iterable<Item> {
     // unit testing (required)
     public static void main(String[] args) {
     	Deque dq = new Deque();
-    	System.out.println(dq.isEmpty());
+    	dq.addFirst(1);
+    	System.out.println(dq.size());
     }	
 
 	

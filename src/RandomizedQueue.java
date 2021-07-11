@@ -1,36 +1,38 @@
 import java.util.Iterator;
 
-public class RandomizedQueue<Item> implements Iterable<Item>{
-    private class ListIterator implements Iterator<Item>{
+public class RandomizedQueue<Item> implements Iterable<Item> {
+	private int size;
+	private Item[] q;
+	
+	private class RandomIterator implements Iterator<Item>{
 
-
+		@Override
 		public boolean hasNext() {
 			// TODO Auto-generated method stub
 			return false;
 		}
+
+		@Override
 		public Item next() {
 			// TODO Auto-generated method stub
 			return null;
 		}
-    	
+		
+	}
+    // construct an empty randomized queue
+    public RandomizedQueue() {
+    	size = 0;
+    	q = (Item[]) new Object[1];
     }
-    private class Node{
-    	Item item; 
-    	Node next;
-    }
- // construct an empty randomized queue
-    public RandomizedQueue(){
-    	
-    }
-    
+
     // is the randomized queue empty?
     public boolean isEmpty() {
-    	return true;
+    	return size == 0;
     }
 
     // return the number of items on the randomized queue
     public int size() {
-    	return 0;
+    	return size;
     }
 
     // add the item
@@ -50,11 +52,16 @@ public class RandomizedQueue<Item> implements Iterable<Item>{
 
     // return an independent iterator over items in random order
     public Iterator<Item> iterator(){
-    	return new ListIterator();
+    	return new RandomIterator();
+    }
+    
+    private void resize() {
+    	
     }
 
     // unit testing (required)
     public static void main(String[] args) {
     	
     }
+
 }
